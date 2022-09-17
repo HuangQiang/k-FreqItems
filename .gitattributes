@@ -1,2 +1,3 @@
-*.cc linguist-language=CUDA
-*.h linguist-language=CUDA
+*.sh linguist-language=Cuda
+*.csv linguist-detectable=false
+representation/*.py linguist-vendored
