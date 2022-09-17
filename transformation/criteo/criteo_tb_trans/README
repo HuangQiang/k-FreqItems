@@ -1,0 +1,80 @@
+# Criteo dataset to LIBSVM format
+
+## Build
+
+First, you have to build the binary executables by:
+
+```
+make
+```
+
+## Usage
+
+For the original Criteo data set from [Criteo's Display Advertising Challenge](http://labs.criteo.com/2014/02/kaggle-display-advertising-challenge-dataset/), transform it into libsvm format by the following command:
+
+```
+./gen_svm_data.sh train.txt test.txt 10
+```
+
+where 10 is the lower bound of frequency for raw feature to have its own dimension in transformed data as a value used by [Juan et. al](http://www.csie.ntu.edu.tw/~cjlin/papers/ffm.pdf).
+
+For the terabytes scale dataset, run
+```
+./gen_days.sh 0 23
+```
+
+to transform the data for each day.
+
+## Usage of `txt2feat`
+
+The code does the one hot encoding on raw features and output all feature extracted.
+
+```
+./txt2feat [tr/te] [training data] [frequency threshold]
+```
+
+## Usage of `feat2idpair`
+
+The python script hash extracted feature from `txt2feat` to integers.
+
+```
+./feat2idpair -n [# of bins] -t [threshold] [features file] [output file]
+```
+
+## Usage of `txt2svm`
+
+The code transform the original data into LIBSVM format by one hot encoding and feature hashing. The mapping between raw feature and its dimension is provided as an input file produced by `feat2idpair`.
+
+Additionally, to enhance the procedure, `openmp` is used to transform several records in parallel.
+
+```
+./txt2svm [training data] [test data] [feature to id data] [I type of test to id data] [# of thread] [--no_svm if don't output as LIBSVM format] [--no_ffm if don't output as LIBFFM format]
+```
+
+## Generate submission file for `criteo` testing set
+
+After you finish predicting labels of the testing set with `LIBLINEAR` using the following command:
+
+```
+./predict -b 1 test.txt.svm model liblinear_output
+```
+
+We provide a script for you to extract probability from LIBLINEAR output file:
+```
+./extract_probability_ouput.py liblinear_output probability_output
+```
+
+Because the label in the test set is not available, you need to submit your prediction to Kaggle:
+
+    https://www.kaggle.com/c/criteo-display-ad-challenge 
+
+If you do not have an account, you will need to create one.
+
+Generate a submission file:
+
+```
+./add_id_to_prediction.py test.csv probability_output submission.csv
+```
+
+Now you can submit `submission.csv` to Kaggle.
+The logloss should be 0.46239 (public leaderboard) and 0.46201 (private leaderboard).
