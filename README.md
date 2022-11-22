@@ -6,6 +6,8 @@ In this repo, we share the implementations and experiments of our work [A New Sp
 
 ## Data Sets
 
+### Data Sets Details
+
 We choose two small sparse data sets with ground truth laebls (i.e., [News20](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#news20) and [RCV1](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#rcv1.multiclass)) and five large-scale real-world sparse data sets (i.e., [URL](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#url), [Avazu](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#avazu), [KDD2012](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#kdd2012), [Criteo10M and Criteo1B](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#criteo_tb)) for performance evaluation.Users can download the data sets from their links. The statistics of data sets are summarized as follows.
 
 | Data Sets | # Data            | # Dim             | # Non-Zero Dim | Data Size | Global $\alpha$ | Local $\alpha$ |
@@ -18,7 +20,7 @@ We choose two small sparse data sets with ground truth laebls (i.e., [News20](ht
 | KDD2012   | $1.5 \times 10^8$ | $5.4 \times 10^7$ | 11             | 7.3 GB    | 0.5             | 0.2            |
 | Criteo1B  | $1.0 \times 10^9$ | $1.0 \times 10^6$ | 39             | 153 GB    | 0.2             | 0.1            |
 
-## Sparse Data Format
+### Data Format
 
 The input sparse data sets are stored in binary format, where each file consists of two fields: `pos` and `data`, as shown below:
 
@@ -85,7 +87,7 @@ Thank you so much for being so patient to read the user manual. We will apprecia
 
 ```tex
 @inproceedings{huang2023a,
-  title={Point-to-Hyperplane Nearest Neighbor Search Beyond the Unit Hypersphere},
+  title={A New Sparse Data Clustering Method Based on Frequent Items},
   author={Huang, Qiang and Luo, Pingyi and Tung, Anthony KH},
   booktitle={Proceedings of the 2023 International Conference on Management of Data (SIGMOD)},
   year={2023}
