@@ -2,13 +2,13 @@
 
 Welcome to the **k-FreqItems** GitHub!
 
-In this repo, we share the implementations and experiments of our work [A New Sparse Data Clustering Method Based on Frequent Items](https://drive.google.com/file/d/1WyqXT0XOzy62MEK7hF_5mBkgNxuzowKT/view?usp=sharing) in [SIGMOD 2023](https://2023.sigmod.org/index.shtml). We implement k-FreqItems and SILK with CUDA on a distributed platform (one master with 4 GPUs and one slave with 4 GPUs) for clustering massive sparse data sets on Jaccard distance. We also adapt two state-of-the-art methods [k-Means++](https://dl.acm.org/doi/abs/10.5555/1283383.1283494) and [k-Means$\parallel$](https://dl.acm.org/doi/abs/10.14778/2180912.2180915) for Jaccard distance as baselines.
+In this repo, we share the implementations and experiments of our work [A New Sparse Data Clustering Method Based on Frequent Items](https://dl.acm.org/doi/pdf/10.1145/3588685) in [SIGMOD 2023](https://2023.sigmod.org/index.shtml). We implement k-FreqItems and SILK with CUDA on a distributed platform (one master with 4 GPUs and one slave with 4 GPUs) for clustering massive sparse set data (or say, sparse binary vectors) on Jaccard distance. We also adapt two state-of-the-art methods [k-Means++](https://dl.acm.org/doi/abs/10.5555/1283383.1283494) and [k-Means$\parallel$](https://dl.acm.org/doi/abs/10.14778/2180912.2180915) for Jaccard distance as baselines (by using FreqItem as the cluster center).
 
 ## Data Sets
 
 ### Data Sets Details
 
-We choose two small sparse data sets with ground truth laebls (i.e., [News20](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#news20) and [RCV1](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#rcv1.multiclass)) and five large-scale real-world sparse data sets (i.e., [URL](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#url), [Avazu](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#avazu), [KDD2012](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#kdd2012), [Criteo10M and Criteo1B](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#criteo_tb)) for performance evaluation.Users can download the data sets from their links. The statistics of data sets are summarized as follows.
+We choose two small sparse data sets with ground truth laebls (i.e., [News20](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#news20) and [RCV1](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#rcv1.multiclass)) and five large-scale real-world sparse data sets (i.e., [URL](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#url), [Avazu](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#avazu), [KDD2012](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#kdd2012), [Criteo10M and Criteo1B](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html#criteo_tb)) for performance evaluation. Users can download the data sets from their links. The statistics of data sets are summarized as follows.
 
 | Data Sets | # Data            | # Dim             | # Non-Zero Dim | Data Size | Global $\alpha$ | Local $\alpha$ |
 | --------- | ----------------- | ----------------- | -------------- | --------- | --------------- | -------------- |
@@ -37,7 +37,7 @@ We also provide the transformation code in the folder `transformation/` to conve
 
 ## Compilation
 
-The source codes require ```nvcc``` with ```c++11``` support. We have provided `Makefile` for compilation. However, for different machines, users may need to specify your local path to MPI libary and CUDA SM and Gencode variations. Suppose the `Makefile` is in accordance with the machines, users can use the following commands to compile the source codes:
+The source codes require `nvcc` with `c++11` support. We have provided `Makefile` for compilation. However, for different machines, users may need to specify your local path to MPI libary and CUDA SM and Gencode variations. Suppose the `Makefile` is in accordance with the machines, users can use the following commands to compile the source codes:
 
 ```bash
 cd methods/
@@ -79,19 +79,23 @@ python plot.py
 
 ### Step 4: Experiments for Center Representation
 
-Finally, we provide the source codes and results for the validation of FreqItem representation (Section 3.2 in [our SIGMOD 2023 paper](https://drive.google.com/file/d/1WyqXT0XOzy62MEK7hF_5mBkgNxuzowKT/view?usp=sharing)). Please refer to the folder `representation/`.
+Finally, we provide the source codes and results for the validation of FreqItem representation (Section 3.2 in [our SIGMOD 2023 paper](https://dl.acm.org/doi/pdf/10.1145/3588685)). Please refer to the folder `representation/`.
 
 ## Reference
 
 Thank you so much for being so patient to read the user manual. We will appreciate using the following BibTeX to cite this work when you use k-FreqItems (or SILK) in your paper.
 
 ```tex
-@inproceedings{huang2023a,
-  title={A New Sparse Data Clustering Method Based on Frequent Items},
+@article{huang2023new,
+  title={A New Sparse Data Clustering Method Based On Frequent Items},
   author={Huang, Qiang and Luo, Pingyi and Tung, Anthony KH},
-  booktitle={Proceedings of the 2023 International Conference on Management of Data (SIGMOD)},
-  year={2023}
+  journal={Proceedings of the ACM on Management of Data},
+  volume={1},
+  number={1},
+  pages={1--28},
+  year={2023},
+  publisher={ACM New York, NY, USA}
 }
 ```
 
-It is welcome to contact me (huangq@comp.nus.edu.sg) if you meet any issue. Thank you.
+It is welcome to contact me (<huangq@comp.nus.edu.sg>) if you meet any issue. Thank you.
