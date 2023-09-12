@@ -24,7 +24,7 @@ LA=0.2                              # local  alpha
 
 for s in 0 1 2
 do
-  for k in 50 150 250 350 450 # 100 200 300 400 500 600 700 800 900 1000 2000 3000 4000 5000
+  for k in 50 100 150 200 250 300 350 400 450 500
   do
     CUDA_VISIBLE_DEVICES=2 mpirun -bind-to none --cpu-set 2-51 -n 1 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
@@ -46,7 +46,7 @@ done
 
 # for s in 0
 # do
-#   for k in 10 100 200 300 400 500 600 700 800 900 1000
+#   for k in 50 100 150 200 250 300 350 400 450 500
 #   do
 #     mpirun -n 1 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
 #       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
@@ -66,7 +66,7 @@ done
 
 # for s in 0
 # do
-#   for k in 10 100 200 300 400 500 600 700 800 900 1000
+#   for k in 50 100 150 200 250 300 350 400 450 500
 #   do
 #     mpirun -n 1 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
 #       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}

@@ -41,7 +41,16 @@ O=results/${dname}/4/               # output folder
 GA=0.5                              # global alpha
 LA=0.3                              # local  alpha
 
-# for s in 1 # 0 2
+for s in 0 1 2
+do
+  for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+  do
+    mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
+      -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
+  done
+done
+
+# for s in 0 1 2
 # do
 #   for k in 10 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
 #   do
@@ -50,15 +59,6 @@ LA=0.3                              # local  alpha
 #       -F ${F} -P ${P} -O ${O}
 #   done
 # done
-
-for s in 1 # 0 2
-do
-  for k in 10 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
-  do
-    mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
-      -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
-  done
-done
 
 # # ------------------------------------------------------------------------------
 # #  k-modes2: run on headnode with 4 GPUs

@@ -30,65 +30,65 @@ max_iter=10                         # maximum iteration
 #   done 
 # done
 
+# derived parameters
+GA=0.3                              # global alpha
+LA=0.4                              # local  alpha
+
+# ------------------------------------------------------------------------------
+#  k-freqitems: run on headnode with 4 GPUs
+# ------------------------------------------------------------------------------
+n=37409776                          # number of data points
+P=/nfsdata/DATASET/kdd12/4/${dname} # prefix for data set
+O=results/${dname}/4/               # output folder
+
+for s in 0 1 2
+do 
+  for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+  do 
+    mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
+      -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
+  done
+done
+
 # # ------------------------------------------------------------------------------
-# #  k-freqitems: run on headnode with 4 GPUs
+# #  k-modes2: run on headnode with 4 GPUs
 # # ------------------------------------------------------------------------------
 # n=37409776                          # number of data points
 # P=/nfsdata/DATASET/kdd12/4/${dname} # prefix for data set
 # O=results/${dname}/4/               # output folder
 
 # # derived parameters
-# GA=0.3                              # global alpha
+# GA=1.0                              # global alpha
 # LA=0.4                              # local  alpha
 
-# for s in 0 1 2
+# for s in 1 2 # 0 1 2
 # do 
-#   for k in 10 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+#   for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
 #   do 
 #     mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
 #       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
 #   done
 # done
 
-# ------------------------------------------------------------------------------
-#  k-modes2: run on headnode with 4 GPUs
-# ------------------------------------------------------------------------------
-n=37409776                          # number of data points
-P=/nfsdata/DATASET/kdd12/4/${dname} # prefix for data set
-O=results/${dname}/4/               # output folder
+# # ------------------------------------------------------------------------------
+# #  k-modes1: run on headnode with 4 GPUs
+# # ------------------------------------------------------------------------------
+# n=37409776                          # number of data points
+# P=/nfsdata/DATASET/kdd12/4/${dname} # prefix for data set
+# O=results/${dname}/4/               # output folder
 
-# derived parameters
-GA=1.0                              # global alpha
-LA=0.4                              # local  alpha
+# # derived parameters
+# GA=0.0                              # global alpha
+# LA=0.0                              # local  alpha
 
-for s in 1 2 # 0 1 2
-do 
-  for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
-  do 
-    mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
-      -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
-  done
-done
+# # *** new setting ***
+# max_iter=1
 
-# ------------------------------------------------------------------------------
-#  k-modes1: run on headnode with 4 GPUs
-# ------------------------------------------------------------------------------
-n=37409776                          # number of data points
-P=/nfsdata/DATASET/kdd12/4/${dname} # prefix for data set
-O=results/${dname}/4/               # output folder
-
-# derived parameters
-GA=0.0                              # global alpha
-LA=0.0                              # local  alpha
-
-# *** new setting ***
-max_iter=1
-
-for s in 1 2 # 0 1 2
-do 
-  for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
-  do 
-    mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
-      -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
-  done
-done
+# for s in 1 2 # 0 1 2
+# do 
+#   for k in 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+#   do 
+#     mpirun -n 4 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
+#       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}
+#   done
+# done

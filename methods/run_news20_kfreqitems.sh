@@ -24,7 +24,7 @@ LA=0.2                              # local  alpha
 
 for s in 0 1 2
 do
-  for k in 50 # 300 400 500 # 20 40 60 80 100 120 140 160 180 200
+  for k in 20 40 60 80 100 120 140 160 180 200
   do
     CUDA_VISIBLE_DEVICES=1 mpirun -n 1 -hostfile hosts ./silk -alg 1 -n ${n} -d ${d} -k ${k} \
       -m ${max_iter} -s ${s} -GA ${GA} -LA ${LA} -F ${F} -P ${P} -O ${O}

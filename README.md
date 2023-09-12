@@ -33,7 +33,7 @@ The input sparse data sets are stored in binary format, where each file consists
 
 For example, suppose there is a sparse data set with four points: `x_0={1,3,5,8}`, `x_1={1,3}`, `x_2={1,6,8}`, and `x_3={1,8,10}`. Then, the `pos` array is `[0,4,6,9,12]`, e.g., pos[0]=0, pos[4]=12. And the `data` array is `[1,3,5,8,1,3,1,6,8,1,8,10]`. If you want to retrieve `x_1`, you can first get its start position of `data` and its length from `pos` by its data ID `1`, i.e., start position is `pos[1]=4`, and its length is `pos[1+1]-pos[1]=6-4=2`. Then you can retrieve `x_1` from `data` by the start position `4` and its length `2`, i.e., `x_1={1,3}`.
 
-We also provide the transformation code in the folder `transformation/` to convert sparse data sets into the binary format we use here.
+We have included the transformation code in the folder `transformation/` to convert sparse data sets into the binary format. In addition, we also provide the binary format of the datasets we used (except Criteo1B) with 1, 2, 4, 8 slices. Users could download the datasets [here](https://drive.google.com/drive/folders/1UceZI0xjBC7WQTmzGVOF4DGDBq481tPx?usp=sharing).
 
 ## Compilation
 
